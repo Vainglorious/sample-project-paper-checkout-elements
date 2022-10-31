@@ -25,7 +25,7 @@ const getClientSecret = async (
       headers: {
         Accept: "*/*",
         "Content-Type": "application/json",
-        Authorization: `Bearer 22ea05f8-1a69-4e2a-9bb0-2be5dc934c88`,
+        Authorization: `Bearer 8324a114-3af3-475a-a870-801348c66550`,
       },
       body: JSON.stringify({
         quantity: 1,
@@ -38,13 +38,13 @@ const getClientSecret = async (
         walletAddress: recipientWalletAddress,
         email: email,
         mintMethod: {
-          "name": "mintTo",
+          "name": "mintPaper",
           "args": {
             "recipient": "$WALLET",
             "quantity": "$QUANTITY"
           },
           "payment": {
-            "value": "0.0008 * $QUANTITY",
+            "value": "0.0009 * $QUANTITY",
             "currency": "ETH"
           }
         },

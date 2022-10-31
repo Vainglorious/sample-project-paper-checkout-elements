@@ -12,7 +12,7 @@ import { fetchClientSecret } from "../lib/utils";
 import styles from "../styles/Theme.module.css";
 
 // Put your contract ID here
-const contractID = "a97715b8-f7d5-4883-b8e2-2bd52d926fd0";
+const contractID = "af341f18-b2c6-435b-993f-28aabf469a4c";
 
 enum CheckoutPage {
   CHOOSE_WALLET = "CHOOSE_WALLET",
