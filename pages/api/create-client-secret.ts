@@ -38,15 +38,9 @@ const getClientSecret = async (
         walletAddress: recipientWalletAddress,
         email: email,
         mintMethod: {
-          "name": "mintPaper",
-          "args": {
-            "recipient": "$WALLET",
-            "quantity": "$QUANTITY"
-          },
-          "payment": {
-            "value": "0.0009 * $QUANTITY",
-            "currency": "ETH"
-          }
+          name: 'mintPaper',
+          args: { _address: '$WALLET', numberOfTokens: '$QUANTITY' },
+          payment: { value: '0.0009 * $QUANTITY', currency: 'ETH' }
         }
         // ,
         // eligibilityMethod: {

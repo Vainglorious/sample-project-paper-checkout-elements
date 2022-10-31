@@ -177,12 +177,12 @@ const ChoosePaymentMethodPage = (props: {
       >
         Pay With Card
       </button>
-      <button
+      {/* <button
         className={styles.mainButton}
         onClick={() => setCurrentPage(CheckoutPage.CHECKOUT_WITH_ETH)}
       >
         Pay With ETH
-      </button>
+      </button> */}
     </div>
   );
 };
