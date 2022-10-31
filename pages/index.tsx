@@ -68,9 +68,9 @@ const Home: NextPage = () => {
 
           <div className={styles.infoSide}>
             {/* Title of your NFT Collection */}
-            <p className={styles.infoTitle}>Under The Sea Collection</p>
+            <p className={styles.infoTitle}>Enter your email; then verify your email using the magic link to log in</p>
             {/* Description of your NFT Collection */}
-            <p className={styles.description}>Cute crab #2</p>
+            <p className={styles.description}>NFT Collection</p>
 
             {(() => {
               switch (currentPage) {
