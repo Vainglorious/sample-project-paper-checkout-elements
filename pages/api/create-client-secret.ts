@@ -31,9 +31,9 @@ const getClientSecret = async (
         quantity: 1,
         metadata: {},
         expiresInMinutes: 30,
-        contractArgs: {
-          tokenId: "0",
-        },
+        // contractArgs: {
+        //   tokenId: "0",
+        // },
         contractId: contractID,
         walletAddress: recipientWalletAddress,
         email: email,
@@ -47,13 +47,14 @@ const getClientSecret = async (
             "value": "0.0009 * $QUANTITY",
             "currency": "ETH"
           }
-        },
-        eligibilityMethod: {
-          "name": "checkClaimEligibility",
-          "args": {
-            "quantity": "$QUANTITY"
-          }
-        } 
+        }
+        // ,
+        // eligibilityMethod: {
+        //   "name": "checkClaimEligibility",
+        //   "args": {
+        //     "quantity": "$QUANTITY"
+        //   }
+        // } 
       }),
     };
 
