@@ -10,6 +10,7 @@ import type { NextPage } from "next";
 import { useEffect, useState } from "react";
 import { fetchClientSecret } from "../lib/utils";
 import styles from "../styles/Theme.module.css";
+import { Blocks } from 'react-loader-spinner'
 
 // Put your contract ID here
 const contractID = "af341f18-b2c6-435b-993f-28aabf469a4c";
@@ -30,12 +31,13 @@ const Home: NextPage = () => {
 
   const [email, setEmail] = useState("");
 
+  const [loading, setLoading] = useState(false);
 
   return (
     <PaperSDKProvider chainName="Goerli">
-      
+
       <div id="background-wrap">
-      
+
         <div className="bubble x1"></div>
         <div className="bubble x2"></div>
         <div className="bubble x3"></div>
@@ -72,41 +74,55 @@ const Home: NextPage = () => {
             {/* Description of your NFT Collection */}
             <p className={styles.description}>NFT Collection</p>
 
-            {(() => {
-              switch (currentPage) {
-                case CheckoutPage.CHOOSE_WALLET:
-                  return (
-                    <ChooseWalletPage
-                      setRecipientWalletAddress={setRecipientWalletAddress}
-                      setCurrentPage={setCurrentPage}
-                      setEmail={setEmail}
-                      email={email}
-                    />
-                  );
-                case CheckoutPage.CHOOSE_PAYMENT_METHOD:
-                  return (
-                    <ChoosePaymentMethodPage setCurrentPage={setCurrentPage} />
-                  );
-                case CheckoutPage.CHECKOUT_WITH_CARD:
-                  return (
-                    <CheckoutWithCardPage
-                      recipientWalletAddress={recipientWalletAddress}
-                      setCurrentPage={setCurrentPage}
-                      email={email}
-                    />
-                  );
-                case CheckoutPage.CHECKOUT_WITH_ETH:
-                  return (
-                    <CheckoutWithEthPage
-                      recipientWalletAddress={recipientWalletAddress}
-                      setCurrentPage={setCurrentPage}
-                      email={email}
-                    />
-                  );
-                case CheckoutPage.PAYMENT_COMPLETE:
-                  return <PaymentCompletePage />;
-              }
-            })()}
+            {
+              loading ?
+                <div style={{ display: 'flex', paddingLeft: 200, alignItems: 'center' }}>
+                  <Blocks
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                  />
+                </div> :
+                <div>{(() => {
+                  switch (currentPage) {
+                    case CheckoutPage.CHOOSE_WALLET:
+                      return (
+                        <ChooseWalletPage
+                          setRecipientWalletAddress={setRecipientWalletAddress}
+                          setCurrentPage={setCurrentPage}
+                          setEmail={setEmail}
+                          email={email}
+                          setLoading={setLoading}
+                        />
+                      );
+                    case CheckoutPage.CHOOSE_PAYMENT_METHOD:
+                      return (
+                        <ChoosePaymentMethodPage setCurrentPage={setCurrentPage} />
+                      );
+                    case CheckoutPage.CHECKOUT_WITH_CARD:
+                      return (
+                        <CheckoutWithCardPage
+                          recipientWalletAddress={recipientWalletAddress}
+                          setCurrentPage={setCurrentPage}
+                          email={email}
+                        />
+                      );
+                    case CheckoutPage.CHECKOUT_WITH_ETH:
+                      return (
+                        <CheckoutWithEthPage
+                          recipientWalletAddress={recipientWalletAddress}
+                          setCurrentPage={setCurrentPage}
+                          email={email}
+                        />
+                      );
+                    case CheckoutPage.PAYMENT_COMPLETE:
+                      return <PaymentCompletePage />;
+                  }
+                })()}</div>
+            }
           </div>
         </div>
       </div>
@@ -122,11 +138,13 @@ const ChooseWalletPage = (props: {
   setCurrentPage: (page: CheckoutPage) => void;
   setEmail: (e: string) => void;
   email: string;
+  setLoading: (e: boolean) => void;
 }) => {
   const setRecipientWalletAddress = props.setRecipientWalletAddress;
   const setCurrentPage = props.setCurrentPage;
   const setEmail = props.setEmail;
   const email = props.email;
+  const setLoading = props.setLoading;
 
   return (
     <div>
@@ -141,7 +159,7 @@ const ChooseWalletPage = (props: {
         />
         <span className={styles.placeholder}>Enter Email</span>
       </label>
-      
+
       <CreateWallet
         emailAddress={email}
         onSuccess={(user: PaperUser) => {
@@ -149,13 +167,14 @@ const ChooseWalletPage = (props: {
           console.log(email);
           setRecipientWalletAddress(user.walletAddress);
           setCurrentPage(CheckoutPage.CHOOSE_PAYMENT_METHOD);
+          setLoading(false)
         }}
         onError={(error) => {
           console.log("error", error);
         }}
       >
         {/* @ts-ignore */}
-        <button className={styles.mainButton}>
+        <button onClick={() => setLoading(true)} className={styles.mainButton}>
           Verify Email
         </button>
       </CreateWallet>
