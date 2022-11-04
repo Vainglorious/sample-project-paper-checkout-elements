@@ -13,7 +13,7 @@ import styles from "../styles/Theme.module.css";
 import { Blocks } from 'react-loader-spinner'
 
 // Put your contract ID here
-const contractID = "af341f18-b2c6-435b-993f-28aabf469a4c";
+const contractID = "484bdbda-96e5-40b7-b67d-a645c89e4bb6";
 
 enum CheckoutPage {
   CHOOSE_WALLET = "CHOOSE_WALLET",
